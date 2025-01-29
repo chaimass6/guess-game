@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        #game-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+        }
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h2>Guess the Number (1-10)</h2>
+        <input type="number" id="guess" min="1" max="10" placeholder="Enter your guess">
+        <button onclick="checkGuess()">Submit</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        const number = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
+        
+        function checkGuess() {
+            let guess = parseInt(document.getElementById("guess").value);
+            let resultText = document.getElementById("result");
+
+            if (guess === number) {
+                resultText.innerHTML = "🎉 You won!";
+                resultText.style.color = "green";
+            } else {
+                resultText.innerHTML = `❌ You lost! The correct number was ${number}`;
+                resultText.style.color = "red";
+            }
+        }
+    </script>
+
+</body>
+</html>
