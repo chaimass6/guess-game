@@ -34,14 +34,12 @@
     </style>
 </head>
 <body>
-    
-        <div id="game-container">
+     <div id="gamecontainer">
             <h2>Guess the Number (1-10)</h2>
             <input type="number" id="guess" min="1" max="10" placeholder="Enter your guess">
             <button onclick="checkGuess()">Submit</button>
             <p id="result"></p>
         </div>
-    
         <script>
             const number = Math.floor(Math.random() * 10) + 1; // Generate a random number between 1 and 10
             
