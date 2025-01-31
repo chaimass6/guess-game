@@ -42,11 +42,9 @@
         </div>
         <script>
             const number = Math.floor(Math.random() * 10) + 1; 
-            
             function checkGuess() {
                 let guess = parseInt(document.getElementById("guess").value);
                 let resultText = document.getElementById("result");
-                
                 if (guess === number) {
                     resultText.innerHTML = "You won!";
                     resultText.style.color = "green";
