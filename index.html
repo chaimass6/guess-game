@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Number</title>
     <style>
-        .heading{
+    .heading{
     color: white;
     background-color: black;
     text-align: center;
@@ -15,7 +15,7 @@
     height: 60vmin;
     margin:5vmin auto;
     display: flex;
-    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     
 }
@@ -23,7 +23,6 @@
     width: 17vmin;
     height: 17vmin;
     margin: auto;
-    
     background-color: #fff;
     border: none;
     border-radius: 2vmin;font-size: 9vmin;
@@ -73,13 +72,16 @@ h1{
     </style>
 </head>
 <body>
+    <div class="heading"><h1>Guess the Number</h1></div>
      <div id="game-container">
             <h2>Guess the Number(1-10)</h2>
             <input type="number" id="guess" min="1" max="10" placeholder="enter number">
             <button onclick="checkGuess()">Submit</button>
             <p id="result"></p>
-        </div>
-       <div class="heading"><h1>Tic-Tac-Toe</h1></div>
+    </div>
+<br>
+<br>
+    <div class="heading"><h1>Tic-Tac-Toe</h1></div>
     <div class="container">
         <button class="box" id="1"></button>
         <button class="box" id="2"></button>
