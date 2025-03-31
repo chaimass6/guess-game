@@ -3,181 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Number</title>
+    <title>Games Hub</title>
     <style>
-    .heading{
-    color: white;
-    background-color: black;
-    text-align: center;
-}
-.container{
-    width: 60vmin;
-    height: 60vmin;
-    margin:5vmin auto;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    
-}
-.box{
-    width: 17vmin;
-    height: 17vmin;
-    margin: auto;
-    background-color: #fff;
-    border: none;
-    border-radius: 2vmin;font-size: 9vmin;
-    color: black;
-}
-.newgame{
-    background-color: rgb(206, 162, 209);
-    border-radius: 2vmin;
-    margin: 10px auto;
-    display: block;
-    height: 40px;
-    font-size: 1rem;
-    
-}
-h1{
-    color: white;
-    text-align: center;
-}
-        body{
+        body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-section {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #34495e;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
             text-align: center;
-            margin: 50px;
-            background-color: #db3232;
+        }
+
+        .game-section h1 {
+            margin-bottom: 20px;
+            font-size: 2rem;
+            color: #ecf0f1;
+        }
+
+        .game-section h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: #bdc3c7;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .box {
+            width: 80px;
+            height: 80px;
+            background-color: #ecf0f1;
+            color: black;
+            font-size: 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        #game-container {
-            background: rgb(212, 176, 176);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(2, 0, 0, 0.1);
-            display: inline-block;
+
+        .box:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+
+        .newgame, .reload {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .newgame:hover, .reload:hover {
+            background-color: #c0392b;
         }
 
         input, button {
             padding: 10px;
             margin: 10px;
             font-size: 16px;
+            border-radius: 5px;
+            border: none;
         }
 
-        #result {
-            font-size: 18px;
+        input {
+            width: 80%;
+        }
+
+        #result, #message {
+            font-size: 1.2rem;
             font-weight: bold;
             margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="heading"><h1>Guess the Number</h1></div>
-     <div id="game-container">
-            <h2>Guess the Number(1-10)</h2>
-            <input type="number" id="guess" min="1" max="10" placeholder="enter number">
-            <button onclick="checkGuess()">Submit</button>
-            <p id="result"></p>
+    <!-- Guess the Number Section -->
+    <div class="game-section">
+        <h1>Guess the Number</h1>
+        <h2>Guess the Number (1-10)</h2>
+        <input type="number" id="guess" min="1" max="10" placeholder="Enter a number">
+        <button onclick="checkGuess()">Submit</button>
+        <button class="reload" onclick="reloadPage()">Play Again</button>
+        <p id="result"></p>
     </div>
-<br>
-<br>
-    <div class="heading"><h1>Tic-Tac-Toe</h1></div>
-    <div class="container">
-        <button class="box" id="1"></button>
-        <button class="box" id="2"></button>
-        <button class="box" id="3"></button>
-        <button class="box" id="4"></button>
-        <button class="box" id="5"></button>
-        <button class="box" id="6"></button>
-        <button class="box" id="7"></button>
-        <button class="box" id="8"></button>
-        <button class="box" id="9"></button>
+
+    <!-- Tic-Tac-Toe Section -->
+    <div class="game-section">
+        <h1>Tic-Tac-Toe</h1>
+        <div class="container">
+            <button class="box" id="1"></button>
+            <button class="box" id="2"></button>
+            <button class="box" id="3"></button>
+            <button class="box" id="4"></button>
+            <button class="box" id="5"></button>
+            <button class="box" id="6"></button>
+            <button class="box" id="7"></button>
+            <button class="box" id="8"></button>
+            <button class="box" id="9"></button>
+        </div>
+        <h2 id="message"></h2>
+        <button class="newgame" onclick="newgame()">New Game</button>
     </div>
-    <h1 id="message"></h1>
-    <button class="newgame" onclick="newgame()">NewGame</button>
-    <button class="newgame" onclick="newgame()">Reset</button>
-    
-        <script>
-            const number = Math.floor(Math.random() * 10) + 1; 
-            function checkGuess() {
-                let guess = parseInt(document.getElementById("guess").value);
-                let resultText = document.getElementById("result");
-                if (guess === number) {
-                    resultText.innerHTML = "You won!";
-                    resultText.style.color = "green";
+
+    <script>
+        // Guess the Number Logic
+        const number = Math.floor(Math.random() * 10) + 1; 
+        function checkGuess() {
+            let guess = parseInt(document.getElementById("guess").value);
+            let resultText = document.getElementById("result");
+            if (guess === number) {
+                resultText.innerHTML = "🎉 You won!";
+                resultText.style.color = "green";
+            } else {
+                resultText.innerHTML = `❌ You lost! The correct number was ${number}`;
+                resultText.style.color = "red";
+            }
+        }
+
+        function reloadPage() {
+            location.reload();
+        }
+
+        // Tic-Tac-Toe Logic
+        let boxes = document.querySelectorAll(".box");
+        let turn = true;
+        const win = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+        let c = 0;
+
+        boxes.forEach((box) => {
+            box.addEventListener("click", () => {
+                if (turn) {
+                    turn = false;
+                    box.innerText = 'O';
+                    box.disabled = true;
                 } else {
-                    resultText.innerHTML = `❌ You lost! The correct number was ${number}`;
-                    resultText.style.color = "red";
+                    turn = true;
+                    box.innerText = 'X';
+                    box.disabled = true;
+                }
+                c++;
+                checkforwinner();
+            });
+        });
+
+        function disableall() {
+            boxes.forEach((box) => {
+                box.disabled = true;
+            });
+        }
+
+        let k = document.querySelector("#message");
+        var checkforwinner = () => {
+            for (let i = 0; i < win.length; i++) {
+                let pos1 = win[i][0], pos2 = win[i][1], pos3 = win[i][2];
+                let posval1 = boxes[pos1].innerText;
+                let posval2 = boxes[pos2].innerText;
+                let posval3 = boxes[pos3].innerText;
+
+                if (c == 9) {
+                    disableall();
+                    k.innerText = 'Draw, Play Again!';
+                }
+                if (posval1 != '' && posval2 != '' && posval3 != '' && posval1 == posval2 && posval2 == posval3) {
+                    disableall();
+                    k.innerText = 'Winner is ' + posval1;
                 }
             }
-            let boxes=document.querySelectorAll(".box");
-// console.log(boxes[0]);
-var turn=true;
-const win=[
-[0,1,2],
-[3,4,5],
-[6,7,8],
-[0,3,6],[1,4,7],[2,5,8],
-[0,4,8],[2,4,6]
+        };
 
-]
-let c=0;
-
-console.log(win);
-boxes.forEach((box)=>{
-
-    box.addEventListener("click",()=>{
-        if(turn){
-            turn=false;
-            box.innerText='O';
-            box.disabled=true;
-        }
-        else{
-            turn=true;
-            box.innerText='X'
-            box.disabled=true;
-        }c++;
-        checkforwinner();
-    })
-})
-function disableall(){
-    boxes.forEach((box)=>{
-        box.disabled=true;
-    })
-}
-
-let k=document.querySelector("#message");
-var checkforwinner=()=>{
-    for(let i=0;i<win.length;i++){
-        let pos1=win[i][0],pos2=win[i][1],pos3=win[i][2];
-        let posval1=boxes[pos1].innerText;
-        let posval2=boxes[pos2].innerText;
-        let posval3=boxes[pos3].innerText;
-        
-        if(c==9){
-            disableall();
-            k.innerText='Draw, PlayAgain!'
-        }
-        if(posval1!=''&&posval2!=''&&posval3!=''&&posval1==posval2&&posval2==posval3&&posval3==posval1){
-            console.log('win');
-            disableall();
-            
-            k.innerText='winner is '+posval1;
-
-        }
-        
-    }
-}
-
-var newgame=()=>{
-    boxes.forEach((box)=>{
-        box.disabled=false;
-        box.innerText='';
-    })
-    k.innerText='';
-    c=0;
-
-}
-        </script>
-    </body>
+        var newgame = () => {
+            boxes.forEach((box) => {
+                box.disabled = false;
+                box.innerText = '';
+            });
+            k.innerText = '';
+            c = 0;
+        };
+    </script>
+</body>
 </html>
